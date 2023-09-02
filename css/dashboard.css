@@ -1,0 +1,46 @@
+body 
+{
+  background:#e5f8ff;
+  font-family: "Open Sans", sans-serif;
+  color: #333333;
+  margin: 0px;
+  
+}
+
+
+header
+{
+  padding: 5px;
+  background-color: #090b6f;
+}
+
+nav
+{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.nav button 
+{
+  background-color: white;
+  color: black;
+  border: none;
+  padding: 10px 20px;
+  text-align: left;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.nav button.active 
+{
+  background-color: black;
+  color: white;
+}
+
+@media (max-width:800px) 
+{
+  nav
+  {
+    flex-direction: column;
+  }  
+}
