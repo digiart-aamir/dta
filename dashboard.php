@@ -13,14 +13,18 @@
 <body>
 <header>
     <nav>
-      <h1>logo</h1>
+      <div class="logo">
+        <img src="images/logo_circle.png" alt="dta_logo">
+        <img src="images/next.png" alt="dta_next">
+        <img src="images/man.png" alt="profile" onclick="showPage('profile')">
+
+      </div>
+      <h2 class="hide">D T A</h2>
       <ul class="nav">
-        <button onclick="showPage('home')">Popular threads</button>
-        <button onclick="showPage('about')">new threads</button>
-        <button onclick="showPage('contact')">your thread</button>
-        <button onclick="showPage('contact')">add thread</button>
-        <button onclick="showPage('contact')">profile</button>
-        <button onclick="showPage('contact')">logout</button>
+        <button onclick="showPage('home')"><img src="images/1.png" alt="home"><p class="button_text">Home</p></button>
+        <button onclick="showPage('your_t')"><img src="images/2.png" alt="your t"><p class="button_text">Your Threads</p></button>
+        <button onclick="showPage('create_t')"><img src="images/3.png" alt="create t"><p class="button_text">Create Threads</p></button>
+        <button onclick="showPage('logout')" id="logoutBtn"><img src="images/4.png" alt="logout"><p class="button_text">Logout</p></button>
       </ul>
     </nav>
 </header>	
@@ -33,14 +37,22 @@
     <p>Home page content goes here...</p>
   </section>
 
-  <section id="about">
+  <section id="your_t">
     <h1>About</h1>
     <p>About page content goes here...</p>
   </section>
 
-  <section id="contact">
-    <h1>Contact</h1>
+  <section id="create_t">
+    <h1>dihd</h1>
     <p>Contact page content goes here...</p>
+  </section>
+
+  <section id="logout">
+    
+  </section>
+
+  <section id="profile">
+  <?php include "profile.php" ?>
   </section>
 
 </main>
@@ -49,10 +61,13 @@
   function showPage(pageId) 
   {
 
+
     // Hide all sections
     document.getElementById('home').style.display = 'none';
-    document.getElementById('about').style.display = 'none';
-    document.getElementById('contact').style.display = 'none';
+    document.getElementById('your_t').style.display = 'none';
+    document.getElementById('create_t').style.display = 'none';
+    document.getElementById('logout').style.display = 'none';
+    document.getElementById('profile').style.display = 'none';
 
     // Show selected section
     document.getElementById(pageId).style.display = 'block';
@@ -76,6 +91,14 @@
 
   // Default to show home page on load
   showPage('home');
+
+  // Add click handler for logout button
+document.getElementById('logoutBtn').addEventListener('click', logout);
+
+  function logout() 
+  {
+    window.location.href = 'login.html';
+  }
 </script>
 
   

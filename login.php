@@ -27,7 +27,7 @@
         {
             // If there is no match, show an error message
             echo '<p>Invalid email or password</p>';
-            echo'  <meta http-equiv="refresh" content="20.1; URL=login.html"> ';
+            echo'  <meta http-equiv="refresh" content="0.1; URL=login.html"> ';
         }
 
     
