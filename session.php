@@ -29,6 +29,7 @@
     $age= $user['age'];
     $category = $user['Category'];
     $field = $user['Field'];
+    $profile = $user['profile'];
 
     $query2 = "SELECT name FROM topics WHERE user_id = '$id'";
     $result2 = mysqli_query($conn, $query2);

@@ -16,7 +16,7 @@
       <div class="logo">
         <img src="images/logo_circle.png" alt="dta_logo">
         <img src="images/next.png" alt="dta_next">
-        <img src="images/man.png" alt="profile" onclick="showPage('profile')">
+        <img src="<?php echo $profile ?>" alt="profile" onclick="showPage('profile')">
 
       </div>
       <h2 class="hide">D T A</h2>
