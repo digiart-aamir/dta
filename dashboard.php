@@ -29,12 +29,11 @@
     </nav>
 </header>	
 
-  <main>
-
+  <main class="main">
+ 
 
   <section id="home">
-    <h1>Home</h1>
-    <p>Home page content goes here...</p>
+    <?php include "home.php" ?>
   </section>
 
   <section id="your_t">
@@ -43,8 +42,7 @@
   </section>
 
   <section id="create_t">
-    <h1>dihd</h1>
-    <p>Contact page content goes here...</p>
+    <?php include "create_t.php" ?>
   </section>
 
   <section id="logout">
