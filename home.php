@@ -96,6 +96,30 @@ echo '</section>';
 ?>
 
 
+<!-- // SQL query to retrieve threads with relevant user info and likes count
+$sql = "SELECT t.id AS thread_id, t.title, u.username, u.profile, COUNT(l.id) AS like_count
+        FROM threads t
+        LEFT JOIN users u ON t.user_id = u.id
+        LEFT JOIN likes l ON t.id = l.thread_id
+        GROUP BY t.id, t.title, u.username, u.profile
+        ORDER BY like_count DESC";
+
+$result = $conn->query($sql);
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        echo "Thread ID: " . $row["thread_id"] . "<br>";
+        echo "Title: " . $row["title"] . "<br>";
+        echo "Username: " . $row["username"] . "<br>";
+        echo "Profile: " . $row["profile"] . "<br>";
+        echo "Likes: " . $row["like_count"] . "<br>";
+        echo "<hr>";
+    }
+} else {
+    echo "No threads found.";
+} -->
+
+
 
 </body>
 </html>
