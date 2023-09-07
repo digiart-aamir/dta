@@ -103,21 +103,16 @@ else
         echo '</div>';
         echo '<div class="add-comment">';
         echo '<h3>Add a Comment</h3>';
-        echo '<form class="add-comment-form"';
+        echo '<form class="add-comment-form" action="add_comment.php" method="POST">';
+        
+        echo '<input type="hidden" name="user_id" value="'.$row['user_id'].'">';
+        echo '<input type="hidden" name="t_id" value="'.$row['t_id'].'">';
+
         echo '<textarea placeholder="Your Comment" class="comment-input" id="comment" name="comment" required></textarea>';
         echo '<button type="submit" class="submit-btn">Submit Comment</button>';
         echo '</form>';
         echo '</div>';
         echo '</section>';
-
-        // $tid2[]= $row['t_id'];
-        // echo "Thread ID: " . $row['t_id'] . "<br>";
-        // echo "Thread Title: " . $row['t_title'] . "<br>";
-        // echo "Thread Content: " . $row['t_content'] . "<br>";
-        // echo "User ID: " . $row['user_id'] . "<br>";
-        // echo "User Name: " . $row['fname'] . " " . $row['lname'] . "<br>";
-        // echo "User Profile: " . $row['profile'] . "<br>";
-
 
     }
 
