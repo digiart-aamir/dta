@@ -96,28 +96,95 @@ echo '</section>';
 ?>
 
 
-<!-- // SQL query to retrieve threads with relevant user info and likes count
-$sql = "SELECT t.id AS thread_id, t.title, u.username, u.profile, COUNT(l.id) AS like_count
-        FROM threads t
-        LEFT JOIN users u ON t.user_id = u.id
-        LEFT JOIN likes l ON t.id = l.thread_id
-        GROUP BY t.id, t.title, u.username, u.profile
-        ORDER BY like_count DESC";
 
+<?php
+
+
+// Construct the SQL query
+$sql = "SELECT
+            t.t_id,
+            t.t_title,
+            t.t_content,
+            t.user_id,
+            u.fname,
+            u.lname,
+            u.profile
+        FROM
+            threads t
+        LEFT JOIN
+            users u ON t.user_id = u.id
+        LEFT JOIN
+            topics tp ON u.id = tp.user_id
+        WHERE
+            t.t_type = ''
+            OR (t.t_type IN ('" . implode("', '", $topics) . "')) 
+            OR tp.name IN ('" . implode("', '", $topics) . "')
+        GROUP BY
+            t.t_id, t.t_title, t.t_content, t.user_id, u.fname, u.lname, u.profile
+        ORDER BY
+            t.t_likes DESC";
+
+// Execute the query
 $result = $conn->query($sql);
 
-if ($result->num_rows > 0) {
-    while ($row = $result->fetch_assoc()) {
-        echo "Thread ID: " . $row["thread_id"] . "<br>";
-        echo "Title: " . $row["title"] . "<br>";
-        echo "Username: " . $row["username"] . "<br>";
-        echo "Profile: " . $row["profile"] . "<br>";
-        echo "Likes: " . $row["like_count"] . "<br>";
-        echo "<hr>";
+// Check for errors
+if (!$result) 
+{
+    echo "Error: " . $conn->error;
+} 
+else 
+{
+    // Print the results
+    while ($row = $result->fetch_assoc()) 
+    {
+        echo '<section class="thread">';
+        echo '<div class="thread-header">';
+        echo '<p class="author"><img src="'. $row['profile'] .'" alt="images/auto.png" class="t_profile"> ' . $row['fname'] . " " . $row['lname'] . '</p>';
+        echo '<h2>' . $row['t_title'] . '</h2>';
+        echo '</div>';
+        echo '<p class="content">' . $row['t_content'] . '</p>';
+        echo '<div class="actions">';
+        echo '<button class="like-btn">Like Thread</button>';
+        echo '</div>';
+        echo '<div class="comments">';
+        foreach ($comments as $comment) {
+            echo '<div class="comment">';
+            echo '<div class="comment-header">';
+            echo '<p class="comment-author">' . $comment["author"] . '</p>';
+            echo '<button class="like-btn">Like</button>';
+            echo '</div>';
+            echo '<p class="comment-content">' . $comment["content"] . '</p>';
+            echo '</div>';
+        }
+        echo '<p>show more comments</p>';
+        echo '</div>';
+        echo '<div class="add-comment">';
+        echo '<h3>Add a Comment</h3>';
+        echo '<form class="add-comment-form">';
+        echo '<textarea placeholder="Your Comment" class="comment-input"></textarea>';
+        echo '<button type="submit" class="submit-btn">Submit Comment</button>';
+        echo '</form>';
+        echo '</div>';
+        echo '</section>';
+
+        $tid2[]= $row['t_id'];
+        echo "Thread ID: " . $row['t_id'] . "<br>";
+        echo "Thread Title: " . $row['t_title'] . "<br>";
+        echo "Thread Content: " . $row['t_content'] . "<br>";
+        echo "User ID: " . $row['user_id'] . "<br>";
+        echo "User Name: " . $row['fname'] . " " . $row['lname'] . "<br>";
+        echo "User Profile: " . $row['profile'] . "<br>";
+
+
     }
-} else {
-    echo "No threads found.";
-} -->
+
+    // Close the result set
+    $result->close();
+}
+
+// Close the database connection
+$conn->close();
+?>
 
 
 
