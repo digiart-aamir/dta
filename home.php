@@ -90,9 +90,9 @@ else
                 echo '<input type="hidden" name="t_id" value="'. $t_id.'">';
                 echo '<button class="like-btn">Like Thread</button>';
                 echo '</div>';    
-                echo '</form>';
-                
+                echo '</form>';  
             }
+            
         }
 
 
@@ -101,7 +101,7 @@ else
         echo '<div class="comments">';
         $a=$row['t_id'];
 
-        $sql2 = "SELECT c.user_id, c.value, u.fname, u.lname
+        $sql2 = "SELECT c.c_id, c.user_id, c.value, u.fname, u.lname
         FROM comments c
         LEFT JOIN users u ON c.user_id = u.id
         WHERE c.t_c_id = $a
@@ -122,7 +122,44 @@ else
                 echo '<div class="comment">';
                 echo '<div class="comment-header">';
                 echo '<p class="comment-author">'. $row2['fname'] . " " . $row2['lname'] . '</p>';
-                echo '<button class="like-btn">Like</button>';
+                
+
+                
+                $c_id = $row2['c_id'];
+                $sql_c = "SELECT COUNT(*) AS count FROM islike_c WHERE c_id = $c_id AND user_id = $id";
+        
+                // Execute the query
+                $result_c = $conn->query($sql_c);
+        
+                // Check for errors
+                if (!$result_c) 
+                {
+                    echo "Error: " . $conn->error;
+                } 
+                else 
+                {
+                    // Fetch the result
+                    $row_c = $result_c->fetch_assoc();
+        
+                    // Check if a record exists
+                    if ($row_c['count'] > 0) 
+                    {
+                        echo '<div class="actions">';
+                        echo '<h1 class="liked-btn">Liked</h1>';
+                        echo '</div>';
+                    } 
+                    else 
+                    {   echo '<form method="POST" action="like_c.php">';
+                        echo '<div class="actions">';
+                        echo '<input type="hidden" name="c_id" value="'. $c_id.'">';
+                        echo '<button class="like-btn">Like</button>';
+                        echo '</div>';    
+                        echo '</form>';  
+                    }
+                    
+                }
+
+
                 echo '</div>';
                 echo '<p class="comment-content">' . $row2['value'] . '</p>';
                 echo '</div>';
