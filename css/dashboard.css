@@ -190,6 +190,17 @@ nav
 .like-btn:hover {
   background-color: #264790;
 }
+.liked-btn 
+{
+  background-color: #264790;
+  color: #fff;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  font-size: 14px;
+  width: 40px;
+  margin:0 auto;
+}
 
 /* Styling for comments */
 .comments {
@@ -261,6 +272,7 @@ nav
 {
   width: 25px;
   height: 25px;
+  border-radius: 25px;
 }
 
 /* create new thread */

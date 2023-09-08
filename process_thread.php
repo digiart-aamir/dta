@@ -4,20 +4,21 @@
 
     if ($_SERVER["REQUEST_METHOD"] == "POST") 
     {
-        $topics_cs = implode("', '", $topics);
+        
         // Retrieve the thread title and content from the form
         $threadTitle = $_POST["threadTitle"];
         $threadContent = $_POST["threadContent"];
         
         // Check if the checkbox is checked (General Thread)
+               // Check if the checkbox is checked (General Thread)
         if (isset($_POST["myCheckbox"]) && $_POST["myCheckbox"] === "true") 
         {
-            $t_type=$topics_cs;
+            $t_type=" ";
         } else 
         {
-            $t_type=" ";
+            $t_type=$field;
         }
-
+ 
         // Assuming you have already established a database connection
 
 // Define your SQL query with placeholders

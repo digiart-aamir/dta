@@ -34,9 +34,7 @@ $sql = "SELECT
         LEFT JOIN
             topics tp ON u.id = tp.user_id
         WHERE
-            t.t_type = ''
-            OR (t.t_type IN ('" . implode("', '", $topics) . "')) 
-            OR tp.name IN ('" . implode("', '", $topics) . "')
+            t.t_type = '' OR t.t_type = '$field'
         GROUP BY
             t.t_id, t.t_title, t.t_content, t.user_id, u.fname, u.lname, u.profile
         ORDER BY
@@ -61,9 +59,45 @@ else
         echo '<h2>' . $row['t_title'] . '</h2>';
         echo '</div>';
         echo '<p class="content">' . $row['t_content'] . '</p>';
-        echo '<div class="actions">';
-        echo '<button class="like-btn">Like Thread</button>';
-        echo '</div>';
+
+        $t_id = $row['t_id'];
+        $user_id = $row['user_id'];
+        $sql_l = "SELECT COUNT(*) AS count FROM islike_t WHERE t_id = $t_id AND user_id = $id";
+
+        // Execute the query
+        $result_l = $conn->query($sql_l);
+
+        // Check for errors
+        if (!$result_l) 
+        {
+            echo "Error: " . $conn->error;
+        } 
+        else 
+        {
+            // Fetch the result
+            $row_l = $result_l->fetch_assoc();
+
+            // Check if a record exists
+            if ($row_l['count'] > 0) 
+            {
+                echo '<div class="actions">';
+                echo '<h1 class="liked-btn">Liked</h1>';
+                echo '</div>';
+            } 
+            else 
+            {   echo '<form method="POST" action="like_t.php">';
+                echo '<div class="actions">';
+                echo '<input type="hidden" name="t_id" value="'. $t_id.'">';
+                echo '<button class="like-btn">Like Thread</button>';
+                echo '</div>';    
+                echo '</form>';
+                
+            }
+        }
+
+
+
+
         echo '<div class="comments">';
         $a=$row['t_id'];
 
