@@ -80,8 +80,22 @@ else
             // Check if a record exists
             if ($row_l['count'] > 0) 
             {
+                $sql_likes = "SELECT t_likes FROM threads WHERE t_id = $t_id";
+                $result_likes = mysqli_query($conn, $sql_likes);
+
+                if (!$result_likes) 
+                {
+                    die("Error in executing query: " . $mysqli->error);
+                }
+
+                // Check if any rows were returned
+                if ($result_likes->num_rows > 0) 
+                {
+                    $row_likes = $result_likes->fetch_assoc();
+                }
+
                 echo '<div class="actions">';
-                echo '<h1 class="liked-btn">Liked</h1>';
+                echo '<h1 class="liked-btn">'.$row_likes['t_likes'].' likes </h1>';
                 echo '</div>';
             } 
             else 

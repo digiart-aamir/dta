@@ -9,7 +9,7 @@
             // Get the values from the form
             $t_id = $_POST['t_id'];
             $user_id = $id;
-        
+            
             // Prepare and execute the SQL INSERT statement
             $sql = "INSERT INTO islike_t (t_id, user_id) VALUES (?, ?)";
             $stmt = $conn->prepare($sql);
