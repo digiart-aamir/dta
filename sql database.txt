@@ -1,4 +1,4 @@
-CREATE DATABASE dta;
+CREATE DATABASE dta_test;
 
 CREATE TABLE users (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -25,7 +25,7 @@ CREATE TABLE threads (
     t_title VARCHAR(255),
     t_content TEXT,
     t_likes INT DEFAULT 0,
-    t_types VARCHAR(50),
+    t_type VARCHAR(50),
     t_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
@@ -40,11 +40,11 @@ CREATE TABLE islike_t (
 
 CREATE TABLE comments (
     c_id INT AUTO_INCREMENT PRIMARY KEY,
-    t_id INT,
+    t_c_id INT,
     c_likes INT DEFAULT 0,
     value VARCHAR(255),
     user_id INT,
-    FOREIGN KEY (t_id) REFERENCES threads(t_id),
+    FOREIGN KEY (t_c_id) REFERENCES threads(t_id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
@@ -53,6 +53,234 @@ CREATE TABLE islike_c (
     id INT AUTO_INCREMENT PRIMARY KEY,
     c_id INT,
     user_id INT,
-    FOREIGN KEY (c_id) REFERENCES comments(id),
+    FOREIGN KEY (c_id) REFERENCES comments(c_id),
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
+
+-- ///sql code to insert dummy data:////
+
+-- Insert 10 users with random categories and fields
+INSERT INTO users (fname, lname, email, age, password, Category, Field)
+VALUES
+    ('User1', 'Lastname1', 'user1@example.com', 25, 'password1', 'Science', 'Computer Science'),
+    ('User2', 'Lastname2', 'user2@example.com', 28, 'password2', 'Science', 'Biology'),
+    ('User3', 'Lastname3', 'user3@example.com', 30, 'password3', 'Science', 'Chemistry'),
+    ('User4', 'Lastname4', 'user4@example.com', 32, 'password4', 'Science', 'Physics'),
+    ('User5', 'Lastname5', 'user5@example.com', 27, 'password5', 'Science', 'Earth Sciences'),
+    ('User6', 'Lastname6', 'user6@example.com', 29, 'password6', 'Arts', 'History'),
+    ('User7', 'Lastname7', 'user7@example.com', 26, 'password7', 'Arts', 'Languages'),
+    ('User8', 'Lastname8', 'user8@example.com', 31, 'password8', 'Arts', 'Philosophy'),
+    ('User9', 'Lastname9', 'user9@example.com', 33, 'password9', 'Arts', 'Visual Arts'),
+    ('User10', 'Lastname10', 'user10@example.com', 24, 'password10', 'Arts', 'Islamic Studies');
+
+
+
+-- Insert topics for the 10 users based on their fields
+-- User 1 (Computer Science)
+INSERT INTO topics (user_id, name)
+VALUES
+    (1, 'Artificial Intelligence'),
+    (1, 'Data Science'),
+    (1, 'Software Engineering'),
+    (1, 'Cybersecurity');
+
+-- User 2 (Biology)
+INSERT INTO topics (user_id, name)
+VALUES
+    (2, 'Genetics'),
+    (2, 'Ecology'),
+    (2, 'Cell Biology'),
+    (2, 'Microbiology');
+
+-- User 3 (Chemistry)
+INSERT INTO topics (user_id, name)
+VALUES
+    (3, 'Organic Chemistry'),
+    (3, 'Inorganic Chemistry'),
+    (3, 'Analytical Chemistry'),
+    (3, 'Biochemistry');
+
+-- User 4 (Physics)
+INSERT INTO topics (user_id, name)
+VALUES
+    (4, 'Quantum Mechanics'),
+    (4, 'Classical Mechanics'),
+    (4, 'Astrophysics'),
+    (4, 'Particle Physics');
+
+-- User 5 (Earth Sciences)
+INSERT INTO topics (user_id, name)
+VALUES
+    (5, 'Geology'),
+    (5, 'Meteorology'),
+    (5, 'Oceanography'),
+    (5, 'Paleontology');
+
+-- User 6 (History)
+INSERT INTO topics (user_id, name)
+VALUES
+    (6, 'Ancient History'),
+    (6, 'Modern History'),
+    (6, 'Cultural History'),
+    (6, 'World History');
+
+-- User 7 (Languages)
+INSERT INTO topics (user_id, name)
+VALUES
+    (7, 'English Language and Literature'),
+    (7, 'French Language and Literature'),
+    (7, 'Comparative Linguistics'),
+    (7, 'Translation Studies');
+
+-- User 8 (Philosophy)
+INSERT INTO topics (user_id, name)
+VALUES
+    (8, 'Ethics'),
+    (8, 'Metaphysics'),
+    (8, 'Political Philosophy'),
+    (8, 'Aesthetics');
+
+-- User 9 (Visual Arts)
+INSERT INTO topics (user_id, name)
+VALUES
+    (9, 'Painting'),
+    (9, 'Sculpture'),
+    (9, 'Photography'),
+    (9, 'Digital Art');
+
+-- User 10 (Political Science)
+INSERT INTO topics (user_id, name)
+VALUES
+    (10, 'Comparative Politics'),
+    (10, 'International Relations'),
+    (10, 'Public Policy'),
+    (10, 'Political Theory');
+
+
+
+
+
+-- Insert threads for user_id 1 (Computer Science)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (1, 'Artificial Intelligence Trends', 'Discuss the latest trends in artificial intelligence.', 7, 'Computer Science'),
+    (1, 'Data Science Tools', 'Share your favorite data science tools and techniques.', 9, 'Computer Science'),
+    (1, 'Software Development Challenges', 'Discuss common challenges in software development.', 6, 'Computer Science'),
+    (1, 'Machine Learning Algorithms', 'Explore various machine learning algorithms.', 8, ' '),
+    (1, 'Frontend Development Tips', 'Share tips for frontend web development.', 5, ' '),
+    (1, 'Cybersecurity Best Practices', 'Discuss cybersecurity best practices.', 4, 'Computer Science');
+
+-- Insert threads for user_id 2 (Biology)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (2, 'Genetic Research Breakthroughs', 'Discuss recent breakthroughs in genetic research.', 6, 'Biology'),
+    (2, 'Ecology and Conservation', 'Explore topics related to ecology and conservation.', 8, 'Biology'),
+    (2, 'Cell Biology Explained', 'Share insights into the world of cell biology.', 7, 'Biology'),
+    (2, ' ', 'This thread has no specific topic.', 3, ' '),
+    (2, ' ', 'This thread has no specific topic.', 2, 'Biology'),
+    (2, 'Marine Biology Adventures', 'Share experiences in marine biology research.', 5, 'Biology');
+    
+-- Insert threads for user_id 3 (Languages)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (3, 'The Beauty of Urdu Poetry', 'Discuss the beauty of Urdu poetry and its significance.', 7, 'Languages'),
+    (3, 'Comparative Linguistics Insights', 'Share insights into comparative linguistics.', 9, 'Languages'),
+    (3, 'Exploring Translation Studies', 'Explore the field of translation studies.', 6, 'Languages'),
+    (3, ' ', 'This thread has no specific topic.', 3, ' '),
+    (3, ' ', 'This thread has no specific topic.', 2, 'Languages'),
+    (3, 'Multilingualism in Today''s World', 'Discuss the impact of multilingualism in the modern world.', 5, 'Languages');
+
+-- Insert threads for user_id 4 (Political Science)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (4, 'Comparative Politics in Action', 'Analyze comparative politics scenarios from around the world.', 6, 'Political Science'),
+    (4, 'Political Theory Debates', 'Engage in debates about political theory.', 8, 'Political Science'),
+    (4, 'Public Policy Challenges', 'Discuss challenges in the field of public policy.', 7, 'Political Science'),
+    (4, ' ', 'This thread has no specific topic.', 3, ' '),
+    (4, ' ', 'This thread has no specific topic.', 2, 'Political Science'),
+    (4, 'International Relations Today', 'Explore current international relations topics.', 5, 'Political Science');
+    
+-- Insert threads for user_id 5 (Earth Sciences)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (5, 'Geology Discoveries', 'Discuss recent discoveries in the field of geology. Geology is a fascinating science that unravels the mysteries of the Earth, from the formation of mountains to the study of earthquakes. Join the discussion and share your insights on geological wonders and breakthroughs.', 8, 'Earth Sciences'),
+    (5, 'Meteorology Insights', 'Share insights into meteorological phenomena. Meteorology is the study of weather and atmospheric conditions. Let\'s explore weather patterns, climate change, and the science behind it all.', 10, 'Earth Sciences'),
+    (5, 'Paleontology Mysteries', 'Explore unsolved mysteries in paleontology. Paleontology takes us back in time to the age of dinosaurs and prehistoric creatures. Dive into the world of fossils, extinction events, and the secrets of ancient life.', 9, 'Earth Sciences'),
+    (5, 'Environmental Challenges', 'Discuss ongoing research in environmental science. Environmental science is vital for understanding and addressing environmental challenges like pollution, climate change, and conservation. Share your thoughts on these critical issues.', 6, 'Earth Sciences'),
+    (5, ' ', 'This thread has no specific topic.', 4, ' '),
+    (5, ' ', 'This thread has no specific topic.', 3, 'Earth Sciences');
+
+-- Insert threads for user_id 6 (History)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (6, 'Ancient History Wonders', 'Explore the wonders of ancient history. Ancient history is filled with remarkable civilizations, from the Egyptians to the Greeks and Romans. Join us in uncovering the mysteries of the past.', 8, 'History'),
+    (6, 'Modern History Debates', 'Engage in debates about modern history events. The modern era has seen significant political, social, and technological changes. Lets discuss pivotal moments and their impact on todays world.', 10, 'History'),
+    (6, 'Cultural History Insights', 'Share insights into cultural history. Culture shapes societies and identities. Explore the diversity of cultures worldwide and their historical significance.', 9, 'History'),
+    (6, 'Historiography Discussion', 'Delve into the world of historiography. Historiography is the study of historical writing and methodology. Discuss how history is researched, interpreted, and written.', 6, 'History'),
+    (6, ' ', 'This thread has no specific topic.', 4, ' '),
+    (6, ' ', 'This thread has no specific topic.', 3, 'History');
+
+-- Insert threads for user_id 7 (Languages)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (7, 'English Literature Classics', 'Discuss classic works of English literature. English literature is a treasure trove of literary classics. Explore the timeless beauty of works by Shakespeare, Dickens, Austen, and more.', 8, 'Languages'),
+    (7, 'French Language Exploration', 'Explore the intricacies of the French language. French is known for its elegance and cultural significance. Dive into French grammar, pronunciation, and cultural nuances.', 10, 'Languages'),
+    (7, 'Comparative Linguistics Insights', 'Share insights into comparative linguistics. Comparative linguistics explores the relationships between languages. Discover linguistic similarities and differences from around the world.', 9, 'Languages'),
+    (7, 'Translation Studies Discussion', 'Engage in discussions about translation studies. Translation plays a crucial role in bridging language barriers. Discuss the art and challenges of translation.', 6, 'Languages'),
+    (7, ' ', 'This thread has no specific topic.', 4, ' '),
+    (7, ' ', 'This thread has no specific topic.', 3, 'Languages');
+
+-- Insert threads for user_id 8 (Philosophy)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (8, 'Ethical Dilemmas', 'Discuss ethical dilemmas and moral philosophy. Ethical dilemmas challenge our moral values and principles. Explore real-life ethical scenarios and philosophical perspectives.', 8, 'Philosophy'),
+    (8, 'Metaphysical Explorations', 'Explore the depths of metaphysical philosophy. Metaphysics delves into the fundamental nature of reality. Dive into discussions about existence, consciousness, and the universe.', 10, 'Philosophy'),
+    (8, 'Political Philosophy Debates', 'Engage in debates about political philosophy. Political philosophy shapes our understanding of governance and society. Debate various political ideologies and theories.', 9, 'Philosophy'),
+    (8, 'Aesthetics and Art', 'Explore the aesthetics of art and creativity. Aesthetics examines the nature of beauty and artistic expression. Appreciate different forms of art and their impact on culture.', 6, 'Philosophy'),
+    (8, ' ', 'This thread has no specific topic.', 4, ' '),
+    (8, ' ', 'This thread has no specific topic.', 3, 'Philosophy');
+-- Insert threads for user_id 9 (Music)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (9, 'Exploring Jazz Music', 'Dive into the world of jazz music, a genre known for its improvisation and rich history. Jazz has influenced many other musical styles and continues to captivate audiences with its unique sound. Share your favorite jazz artists, albums, and moments in jazz history. Let\'s celebrate the artistry of jazz!', 12, 'Music'),
+    (9, 'Classical Music Masterpieces', 'Discover the timeless masterpieces of classical music. Classical compositions by Beethoven, Mozart, Bach, and others have left an indelible mark on the world of music. Discuss your favorite classical pieces, the impact of classical music on culture, and the enduring legacy of classical composers.', 15, 'Music'),
+    (9, 'Music Education Insights', 'Share insights into music education. Music education plays a vital role in nurturing young talents and preserving musical traditions. Discuss effective teaching methods, the importance of music in schools, and the role of music teachers in shaping future musicians.', 10, 'Music'),
+    (9, 'Musical Instruments and Techniques', 'Explore musical instruments and techniques. From pianos to violins, different instruments contribute to the diversity of music. Dive into discussions about musical techniques, instrument maintenance, and the joy of playing music.', 7, 'Music'),
+    (9, ' ', 'This thread has no specific topic.', 5, ' '),
+    (9, ' ', 'This thread has no specific topic.', 4, 'Music');
+
+-- Insert threads for user_id 10 (Literature)
+INSERT INTO threads (user_id, t_title, t_content, t_likes, t_type)
+VALUES
+    (10, 'World of Fantasy Literature', 'Embark on a journey into the enchanting world of fantasy literature. Fantasy novels transport readers to magical realms, filled with mythical creatures and epic adventures. Share your favorite fantasy authors, series, and the impact of fantasy literature on the literary landscape.', 12, 'Literature'),
+    (10, 'Contemporary Literary Debates', 'Engage in debates about contemporary literature. Literature reflects the evolving themes and narratives of our time. Discuss recent literary works, emerging authors, and the influence of literature on society today.', 15, 'Literature'),
+    (10, 'The Power of Poetry', 'Explore the power of poetry in literature. Poetry is a form of artistic expression that captures emotions and experiences in unique ways. Dive into discussions about famous poets, poetic techniques, and the enduring beauty of poetry.', 10, 'Literature'),
+    (10, ' ', 'This thread has no specific topic.', 7, ' '),
+    (10, ' ', 'This thread has no specific topic.', 6, 'Literature'),
+    (10, 'Book Recommendations', 'Share your book recommendations and reading lists. Discover new literary treasures and exchange ideas with fellow book enthusiasts. Let\'s build a library of must-read books.', 5, 'Literature');
+
+
+
+
+
+
+
+
+
+-- islike_t
+
+
+
+
+
+
+
+INSERT INTO islike_t (t_id, user_id)
+SELECT 1 AS t_id, id
+FROM (
+    SELECT id
+    FROM users
+    ORDER BY RAND()
+    LIMIT 7
+) AS random_users;
