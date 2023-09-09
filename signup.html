@@ -1,171 +1,175 @@
 <!DOCTYPE html>
-<html lang="en" >
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>Login Page in HTML with CSS Code Example</title>
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
-  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-  <link rel="stylesheet" href="css/styles.css">
+    <meta charset="UTF-8">
+    <title>Login Page in HTML with CSS Code Example</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"
+        integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
 
 </head>
+
 <body>
-	<!-- partial:index.partial.html -->
-	<div class="box-form">
-        <form action="signup.php"  class="portion" method="post">
-            <div class="right">	
-                <h1>Sign Up </h1>		
+    <!-- partial:index.partial.html -->
+    <div class="box-form">
+        <form action="signup.php" class="portion" method="post">
+            <div class="right">
+                <h1>Sign Up </h1>
                 <div class="inputs">
                     <input type="text" id="firstname" name="firstname" placeholder="First Name/ Username" required>
-                        <br>                    
+                    <br>
                     <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
-                        <br>
+                    <br>
                     <input type="email" id="email" name="email" placeholder="Email: example@abc.com" required>
-                        <br>
+                    <br>
                     <input type="number" id="age" name="age" placeholder="Age" required>
-                        <br>
+                    <br>
                     <input type="password" id="password" name="password" placeholder="Password" required>
                     <input type="password" id="cpassword" name="cpassword" placeholder="Confirm Password" required>
-                        					
+
                 </div>
             </div>
-            <div class="right">			
-                <div class="inputs">                         
+            <div class="right">
+                <div class="inputs">
                     <select id="category" required name="category">
                         <option value="">Select Your field</option>
-                        <option value="science">Science</option> 
+                        <option value="science">Science</option>
                         <option value="arts">Arts</option>
-                    </select>        
-                    <select id="field" required name="field"></select>            
+                    </select>
+                    <select id="field" required name="field"></select>
                     <div id="topics"></div>
-                </div>                
-                <br><br>               
-                
+                </div>
+                <br><br>
+
                 <button>Create Account</button>
-        
+
             </div>
-        	
+
         </form>
-        		
-	</div>
-	<!-- partial -->
-  
+
+    </div>
+    <!-- partial -->
+
     <script>
         // Category options
         const categories = {
-    science: ['Choose your subject', 'Computer Science', 'Biology', 'Chemistry', 'Physics', 'Earth Sciences', 'Mathematics', 'Environmental Science', 'Geography', 'Astronomy'],
-    arts: ['Choose your subject', 'History', 'Languages', 'Philosophy', 'Visual Arts', 'Islamic Studies', 'Sociology', 'Political Science', 'Music', 'Literature', 'Film Studies', 'Theater']
-};
+            science: ['Choose your subject', 'Computer Science', 'Biology', 'Chemistry', 'Physics', 'Earth Sciences', 'Mathematics', 'Environmental Science', 'Geography', 'Astronomy'],
+            arts: ['Choose your subject', 'History', 'Languages', 'Philosophy', 'Visual Arts', 'Islamic Studies', 'Sociology', 'Political Science', 'Music', 'Literature', 'Film Studies', 'Theater']
+        };
 
-// Topic options
-const topics = {
-    'Biology': ['Microbiology', 'Genetics', 'Ecology', 'Zoology', 'Botany', 'Evolutionary Biology', 'Cell Biology', 'Marine Biology'],
-    'Computer Science': ['Artificial Intelligence', 'Data Science', 'Software Engineering', 'Computer Graphics', 'Algorithms', 'Cybersecurity', 'Human-Computer Interaction'],
-    'Chemistry': ['Organic Chemistry', 'Inorganic Chemistry', 'Physical Chemistry', 'Analytical Chemistry', 'Biochemistry', 'Materials Chemistry', 'Environmental Chemistry'],
-    'Physics': ['Classical Mechanics', 'Quantum Mechanics', 'Thermodynamics', 'Astrophysics', 'Nuclear Physics', 'Condensed Matter Physics', 'Particle Physics'],
-    'Earth Sciences': ['Geology', 'Meteorology', 'Oceanography', 'Geophysics', 'Paleontology'],
-    'Islamic Studies': ['History of Islam', 'Quranic Studies', 'Islamic Philosophy', 'Islamic Art and Architecture', 'Islamic Law', 'Sufism Studies'],
-    'Languages': ['English Language and Literature', 'French Language and Literature', 'Spanish Language and Literature', 'Comparative Linguistics', 'Translation Studies', 'Urdu Language and Literature', 'Arabic Language and Literature'],
-    'Sociology': ['Social Theory', 'Cultural Sociology', 'Criminology', 'Medical Sociology', 'Gender Studies', 'Social Movements'],
-    'History': ['Ancient History', 'Modern History', 'World History', 'Historiography', 'Cultural History'],
-    'Philosophy': ['Ethics', 'Epistemology', 'Metaphysics', 'Political Philosophy', 'Aesthetics', 'Existentialism'],
-    'Visual Arts': ['Painting', 'Sculpture', 'Photography', 'Printmaking', 'Digital Art', 'Installation Art'],
-    'Political Science': ['Comparative Politics', 'International Relations', 'Political Theory', 'Public Policy', 'Political Economy'],
-    'Mathematics': ['Algebra', 'Calculus', 'Geometry', 'Statistics', 'Number Theory'],
-    'Environmental Science': ['Ecology', 'Climate Science', 'Conservation Biology'],
-    'Geography': ['Physical Geography', 'Human Geography', 'Geographic Information Systems (GIS)'],
-    'Astronomy': ['Solar System', 'Cosmology', 'Stellar Astronomy'],
-    'Music': ['Classical Music', 'Jazz', 'Rock', 'World Music', 'Music Theory'],
-    'Literature': ['Novels', 'Poetry', 'Drama', 'Literary Criticism'],
-    'Film Studies': ['Film History', 'Cinematography', 'Film Analysis'],
-    'Theater': ['Dramatic Arts', 'Theater History', 'Acting', 'Playwriting']
-};
-
-
+        // Topic options
+        const topics = {
+            'Biology': ['Microbiology', 'Genetics', 'Ecology', 'Zoology', 'Botany', 'Evolutionary Biology', 'Cell Biology', 'Marine Biology'],
+            'Computer Science': ['Artificial Intelligence', 'Data Science', 'Software Engineering', 'Computer Graphics', 'Algorithms', 'Cybersecurity', 'Human-Computer Interaction'],
+            'Chemistry': ['Organic Chemistry', 'Inorganic Chemistry', 'Physical Chemistry', 'Analytical Chemistry', 'Biochemistry', 'Materials Chemistry', 'Environmental Chemistry'],
+            'Physics': ['Classical Mechanics', 'Quantum Mechanics', 'Thermodynamics', 'Astrophysics', 'Nuclear Physics', 'Condensed Matter Physics', 'Particle Physics'],
+            'Earth Sciences': ['Geology', 'Meteorology', 'Oceanography', 'Geophysics', 'Paleontology'],
+            'Islamic Studies': ['History of Islam', 'Quranic Studies', 'Islamic Philosophy', 'Islamic Art and Architecture', 'Islamic Law', 'Sufism Studies'],
+            'Languages': ['English Language and Literature', 'French Language and Literature', 'Spanish Language and Literature', 'Comparative Linguistics', 'Translation Studies', 'Urdu Language and Literature', 'Arabic Language and Literature'],
+            'Sociology': ['Social Theory', 'Cultural Sociology', 'Criminology', 'Medical Sociology', 'Gender Studies', 'Social Movements'],
+            'History': ['Ancient History', 'Modern History', 'World History', 'Historiography', 'Cultural History'],
+            'Philosophy': ['Ethics', 'Epistemology', 'Metaphysics', 'Political Philosophy', 'Aesthetics', 'Existentialism'],
+            'Visual Arts': ['Painting', 'Sculpture', 'Photography', 'Printmaking', 'Digital Art', 'Installation Art'],
+            'Political Science': ['Comparative Politics', 'International Relations', 'Political Theory', 'Public Policy', 'Political Economy'],
+            'Mathematics': ['Algebra', 'Calculus', 'Geometry', 'Statistics', 'Number Theory'],
+            'Environmental Science': ['Ecology', 'Climate Science', 'Conservation Biology'],
+            'Geography': ['Physical Geography', 'Human Geography', 'Geographic Information Systems (GIS)'],
+            'Astronomy': ['Solar System', 'Cosmology', 'Stellar Astronomy'],
+            'Music': ['Classical Music', 'Jazz', 'Rock', 'World Music', 'Music Theory'],
+            'Literature': ['Novels', 'Poetry', 'Drama', 'Literary Criticism'],
+            'Film Studies': ['Film History', 'Cinematography', 'Film Analysis'],
+            'Theater': ['Dramatic Arts', 'Theater History', 'Acting', 'Playwriting']
+        };
 
 
 
-    
+
+
+
         // Get DOM elements
         const categoryElement = document.getElementById('category');
         const fieldElement = document.getElementById('field');
         const topicsElement = document.getElementById('topics');
-    
+
         // Category change listener
         categoryElement.addEventListener('change', (e) => {
-        
-        // Get selected category
-        const category = e.target.value;
-    
-        // Populate fields dropdown
-        const fields = categories[category];
-        const options = fields.map(field => `<option value="${field}">${field}</option>`);
-        
-        fieldElement.innerHTML = options.join('');
-    
-        // Reset topics
-        topicsElement.innerHTML = '';
-    
+
+            // Get selected category
+            const category = e.target.value;
+
+            // Populate fields dropdown
+            const fields = categories[category];
+            const options = fields.map(field => `<option value="${field}">${field}</option>`);
+
+            fieldElement.innerHTML = options.join('');
+
+            // Reset topics
+            topicsElement.innerHTML = '';
+
         });
-    
+
         // Field change listener  
         fieldElement.addEventListener('change', (e) => {
-    
-        // Get selected field value
-        const field = e.target.value;
-    
-        // Clear previous topics
-        topicsElement.innerHTML = '';
-    
-        // Check if topics defined for field
-        if(topics[field]) {
-    
-            // Render checkboxes if found
-            const checkboxes = topics[field].map(topic => {
-            return `
+
+            // Get selected field value
+            const field = e.target.value;
+
+            // Clear previous topics
+            topicsElement.innerHTML = '';
+
+            // Check if topics defined for field
+            if (topics[field]) {
+
+                // Render checkboxes if found
+                const checkboxes = topics[field].map(topic => {
+                    return `
                 <br><label>
                 <input type="checkbox" name="topics[]" id="topics" value="${topic}">
                 ${topic}
                 </label>
             `;
-            });
-    
-            topicsElement.innerHTML = checkboxes.join('');
-    
-        }
-    
+                });
+
+                topicsElement.innerHTML = checkboxes.join('');
+
+            }
+
         });
 
 
 
         // Get password and confirm password fields
-const password = document.getElementById('password');
-const confirmPassword = document.getElementById('cpassword');
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('cpassword');
 
-// Check passwords match on form submit
-document.querySelector('form').addEventListener('submit', function(e) {
+        // Check passwords match on form submit
+        document.querySelector('form').addEventListener('submit', function (e) {
 
-  // Prevent form submit
-  e.preventDefault();
+            // Prevent form submit
+            e.preventDefault();
 
-  // Validate
-  if(password.value === confirmPassword.value) {
-    this.submit(); // Submit form if match
-  } else {
-    //Show error if mismatch
-    alert("Passwords don't match. Please re-enter your passwords.");
-    
-    //Clear fields 
-    password.value = ''; 
-    confirmPassword.value = '';
+            // Validate
+            if (password.value === confirmPassword.value) {
+                this.submit(); // Submit form if match
+            } else {
+                //Show error if mismatch
+                alert("Passwords don't match. Please re-enter your passwords.");
 
-    // Focus on password field
-    password.focus(); 
-  }
-  
-  
-});
+                //Clear fields 
+                password.value = '';
+                confirmPassword.value = '';
+
+                // Focus on password field
+                password.focus();
+            }
+
+
+        });
     </script>
 
 
 </body>
+
 </html>

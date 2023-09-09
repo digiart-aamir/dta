@@ -187,7 +187,8 @@ nav
   font-size: 14px;
 }
 
-.like-btn:hover {
+.like-btn:hover 
+{
   background-color: #264790;
 }
 .liked-btn 

@@ -61,36 +61,4 @@
             }
 
         }
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-    // Print all variables
-// echo "First Name: " . $firstname . "<br>";
-// echo "Last Name: " . $lastname . "<br>";
-// echo "Email: " . $email . "<br>";
-// echo "Age: " . $age . "<br>";
-// echo "Password: " . $password . "<br>";
-// echo "Password: " . $hash . "<br>";
-// echo "Category: " . $category . "<br>";
-// echo "Field: " . $field . "<br>";
-// echo "Topics:<br>";
-// foreach ($topics as $topic) {
-    
-//   echo $topic . "<br>"; 
-    
-// }
-
-
-
 ?>
