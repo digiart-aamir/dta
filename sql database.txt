@@ -266,21 +266,3 @@ VALUES
 
 
 
-
-
--- islike_t
-
-
-
-
-
-
-
-INSERT INTO islike_t (t_id, user_id)
-SELECT 1 AS t_id, id
-FROM (
-    SELECT id
-    FROM users
-    ORDER BY RAND()
-    LIMIT 7
-) AS random_users;
