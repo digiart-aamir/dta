@@ -47,8 +47,7 @@ include "session.php";
     </section>
 
     <section id="your_t">
-      <h1>About</h1>
-      <p>About page content goes here...</p>
+      <?php include "your_t.php"?>
     </section>
 
     <section id="create_t">
